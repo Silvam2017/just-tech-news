@@ -27,8 +27,7 @@ router.get('/', (req, res) => {
             attributes: ['username']
          }
       ]
-   })
-      .then(dbPostData => {
+   }).then(dbPostData => {
          // pass a single post object into the homepage template
          console.log(dbPostData[0]);
          const posts = dbPostData.map(post => post.get({ plain: true }));
@@ -36,8 +35,7 @@ router.get('/', (req, res) => {
             posts,
             loggedIn: req.session.loggedIn
          });
-      })
-      .catch(err => {
+      }).catch(err => {
          console.log(err);
          res.status(500).json(err);
       });
@@ -78,8 +76,7 @@ router.get('/post/:id', (req, res) => {
          attributes: ['username']
        }
      ]
-   })
-     .then(dbPostData => {
+   }).then(dbPostData => {
        if (!dbPostData) {
          res.status(404).json({ message: 'No post found with this id' });
          return;
@@ -93,8 +90,7 @@ router.get('/post/:id', (req, res) => {
           post, 
           loggedIn: req.session.loggedIn
          });
-     })
-     .catch(err => {
+     }).catch(err => {
        console.log(err);
        res.status(500).json(err);
      });

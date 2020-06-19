@@ -12,8 +12,7 @@ async function deleteFormHandler(event) {
       headers: {
         'Content-Type': 'application/json'
       }
-    })
-      .then(response => response.json());
+    }).then(response => response.json());
 
    for (var i = 0; i < resComment.length; i++){
       console.log(resComment[i].id);

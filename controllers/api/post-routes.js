@@ -37,9 +37,7 @@ router.get('/', (req, res) => {
         attributes: ['username']
       }
     ]
-  })
-    .then(dbPostData => res.json(dbPostData))
-    .catch(err => {
+  }).then(dbPostData => res.json(dbPostData)).catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
@@ -81,15 +79,13 @@ router.get('/:id', (req, res) => {
         attributes: ['username']
       }
     ]
-  })
-    .then(dbPostData => {
+  }).then(dbPostData => {
       if (!dbPostData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
       res.json(dbPostData);
-    })
-    .catch(err => {
+    }).catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
@@ -102,9 +98,7 @@ router.get('/:id', (req, res) => {
     title: req.body.title,
     post_url: req.body.post_url,
     user_id: req.session.user_id
-  })
-    .then(dbPostData => res.json(dbPostData))
-    .catch(err => {
+  }).then(dbPostData => res.json(dbPostData)).catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
@@ -115,9 +109,7 @@ router.put('/upvote', withAuth, (req, res) => {
   // make sure the session exists first
   if (req.session) {
     // pass session id along with all destructured properties on req.body
-    Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
-      .then(updatedVoteData => res.json(updatedVoteData))
-      .catch(err => {
+    Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User }).then(updatedVoteData => res.json(updatedVoteData)).catch(err => {
         console.log(err);
         res.status(500).json(err);
       });
@@ -135,15 +127,13 @@ router.put('/:id', withAuth, (req, res) => {
         id: req.params.id
       }
     }
-  )
-    .then(dbPostData => {
+  ).then(dbPostData => {
       if (!dbPostData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
       res.json(dbPostData);
-    })
-    .catch(err => {
+    }).catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
@@ -159,15 +149,13 @@ router.delete('/:id', (req, res) => {
       where: {
         id: req.params.id
       }
-  })
-    .then(dbPostData => {
+  }).then(dbPostData => {
       if(!dbPostData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
       res.json(dbPostData);
-    })
-    .catch(err => {
+    }).catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
